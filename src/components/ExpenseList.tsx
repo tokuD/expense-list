@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { ExpenseItem } from '.'
+import { BarChart, ExpenseItem } from '.'
 import { useExpenseList } from '@/providers'
 
 type Props = {}
@@ -38,12 +38,19 @@ const ExpenseList = (props: Props) => {
         </select>
       </div>
 
-      {filteredExpenseList.map((item) => (
-        <ExpenseItem
-          key={item.id}
-          item={item}
-        />
-      ))}
+      {filteredExpenseList.length !== 0 && (
+        <BarChart expenseList={filteredExpenseList} />
+      )}
+      {filteredExpenseList.length !== 0 ? (
+        filteredExpenseList.map((item) => (
+          <ExpenseItem
+            key={item.id}
+            item={item}
+          />
+        ))
+      ) : (
+        <p className="text-center">No expenses found.</p>
+      )}
     </div>
   )
 }

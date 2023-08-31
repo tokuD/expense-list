@@ -11,6 +11,23 @@ const ExpenseForm = (props: Props) => {
   const [title, setTitle] = useState<string>('')
   const [amount, setAmount] = useState<number | ''>('')
   const [date, setDate] = useState<string | ''>('')
+  const [formIsShown, setFormIsShown] = useState<boolean>(false)
+
+  if (!formIsShown) {
+    return (
+      <div className="rounded-md p-4 bg-purple-700 w-full flex flex-col gap-4">
+        <div className="flex justify-center">
+          <button
+            type="button"
+            className="rounded-md bg-purple-950 text-white py-2 px-4"
+            onClick={() => setFormIsShown(true)}
+          >
+            Add New Expense
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -81,7 +98,14 @@ const ExpenseForm = (props: Props) => {
         </div>
       </div>
       {/* Submit Button */}
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-4">
+        <button
+          type="submit"
+          className="rounded-md bg-purple-950 text-white py-2 px-4"
+          onClick={() => setFormIsShown(false)}
+        >
+          Cancel
+        </button>
         <button
           type="submit"
           className="rounded-md bg-purple-950 text-white py-2 px-4"
